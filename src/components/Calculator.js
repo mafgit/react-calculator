@@ -1,5 +1,4 @@
-/* FIXME: input & prev screens are problematic */
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Grid from './Grid'
 import Screen from './Screen'
 import '../styles/calculator.css'
@@ -14,20 +13,23 @@ const Calculator = () => {
 
     switch (operator) {
       case '+':
-        setInput(parseFloat(prev) + parseFloat(input))
+        setInput(parseFloat(prev.slice(0, prev.length - 2)) + parseFloat(input))
+        // sliced to remove the space and operator from prev
         break
       case '-':
-        setInput(parseFloat(prev) - parseFloat(input))
+        setInput(parseFloat(prev.slice(0, prev.length - 2)) - parseFloat(input))
         break
       case '/':
-        setInput(parseFloat(prev) / parseFloat(input))
+        setInput(parseFloat(prev.slice(0, prev.length - 2)) / parseFloat(input))
         break
       case '*':
-        setInput(parseFloat(prev) * parseFloat(input))
+        setInput(parseFloat(prev.slice(0, prev.length - 2)) * parseFloat(input))
         break
       default:
         break
     }
+
+    setPrev('')
   }
 
   const clear = () => {
@@ -35,11 +37,6 @@ const Calculator = () => {
     setPrev('')
     setInput('')
   }
-
-  useEffect(() => {
-    setPrev(input)
-    setInput('')
-  }, [operator])
 
   return (
     <div className="calculator">
@@ -50,6 +47,7 @@ const Calculator = () => {
         setOperator={setOperator}
         equal={equal}
         clear={clear}
+        setPrev={setPrev}
       />
     </div>
   )
