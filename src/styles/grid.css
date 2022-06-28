@@ -1,0 +1,27 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  gap: 20px;
+  justify-items: center;
+  align-items: center;
+}
+
+.btn {
+  border-radius: 50%;
+  font-size: 25px;
+  background-color: #303030;
+  transition: 0.2s;
+  color: #e9e9e9;
+  width: 60px;
+  height: 60px;
+}
+
+.btn:hover {
+  filter: brightness(1.5);
+  transition: 0.2s;
+}
+
+.operator-btn {
+  background-color: rgb(0, 68, 255);
+}
