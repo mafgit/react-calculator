@@ -1,11 +1,20 @@
 import React from 'react'
 import '../styles/grid.css'
 
-const Grid = ({ input, setInput, setOperator, equal, clear, setPrev }) => {
+const Grid = ({
+  input,
+  setInput,
+  setOperator,
+  equal,
+  clear,
+  prev,
+  setPrev,
+}) => {
   const addToScreen = (n) => setInput(input.toString() + n.toString())
 
   const selectOperator = (o) => {
-    if (input !== '') {
+    // FIXME: if both prev & input are there and an operator is hit then equal to must happen
+    if (1 /* FIXME: condition */) {
       setOperator(o)
       if (o === '*') o = '×'
       if (o === '/') o = '÷'
@@ -19,6 +28,13 @@ const Grid = ({ input, setInput, setOperator, equal, clear, setPrev }) => {
   const del = () => {
     setInput(input.slice(0, input.length - 1))
   }
+
+  document.addEventListener('keyup', (e) => {
+    if (e.key.match(/\d/)) addToScreen(e.key)
+    else if (e.key === 'Backspace') del()
+    else if ('/+-*'.includes(e.key)) selectOperator(e.key)
+    else if (e.key === 'Enter') equal()
+  })
 
   return (
     <div className="grid">

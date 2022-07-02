@@ -10,25 +10,26 @@ const Calculator = () => {
 
   const equal = () => {
     if (prev === '') return 0
-
+    let res
     switch (operator) {
       case '+':
-        setInput(parseFloat(prev.slice(0, prev.length - 2)) + parseFloat(input))
+        res = parseFloat(prev.slice(0, prev.length - 2)) + parseFloat(input)
         // sliced to remove the space and operator from prev
         break
       case '-':
-        setInput(parseFloat(prev.slice(0, prev.length - 2)) - parseFloat(input))
+        res = parseFloat(prev.slice(0, prev.length - 2)) - parseFloat(input)
         break
       case '/':
-        setInput(parseFloat(prev.slice(0, prev.length - 2)) / parseFloat(input))
+        res = parseFloat(prev.slice(0, prev.length - 2)) / parseFloat(input)
         break
       case '*':
-        setInput(parseFloat(prev.slice(0, prev.length - 2)) * parseFloat(input))
+        res = parseFloat(prev.slice(0, prev.length - 2)) * parseFloat(input)
         break
       default:
         break
     }
 
+    setInput(res.toString())
     setPrev('')
   }
 
@@ -47,6 +48,7 @@ const Calculator = () => {
         setOperator={setOperator}
         equal={equal}
         clear={clear}
+        prev={prev}
         setPrev={setPrev}
       />
     </div>
