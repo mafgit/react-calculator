@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../styles/grid.css'
 
 const Grid = ({
@@ -10,11 +10,12 @@ const Grid = ({
   prev,
   setPrev,
 }) => {
-  const addToScreen = (n) => setInput(input.toString() + n.toString())
+  const addToScreen = (n) => {
+    setInput(input + n)
+  }
 
   const selectOperator = (o) => {
-    // FIXME: if both prev & input are there and an operator is hit then equal to must happen
-    if (1 /* FIXME: condition */) {
+    if (prev === '' && input !== '') {
       setOperator(o)
       if (o === '*') o = '×'
       if (o === '/') o = '÷'
@@ -22,6 +23,9 @@ const Grid = ({
 
       setPrev(input + ' ' + o)
       setInput('')
+    } else if (prev !== '' && input !== '') {
+      equal()
+      // TODO: get equal's value and show it in prev with an operator sign
     }
   }
 
@@ -29,25 +33,34 @@ const Grid = ({
     setInput(input.slice(0, input.length - 1))
   }
 
-  document.addEventListener('keyup', (e) => {
-    if (e.key.match(/\d/)) addToScreen(e.key)
+  const keyupHandler = (e) => {
+    if (e.key.match(/^\d$/)) addToScreen(e.key)
     else if (e.key === 'Backspace') del()
     else if ('/+-*'.includes(e.key)) selectOperator(e.key)
     else if (e.key === 'Enter') equal()
-  })
+    else if (e.key === 'c') clear()
+  }
+
+  useEffect(() => {
+    window.addEventListener('keyup', keyupHandler)
+
+    return () => {
+      window.removeEventListener('keyup', keyupHandler)
+    }
+  }, [keyupHandler])
 
   return (
     <div className="grid">
       <button className="btn" onClick={clear}>
-        c
+        C
       </button>
-      <button className="btn" onClick={del}>
-        {'<'}
+      <button className="btn back-btn" onClick={del}>
+        {'DEL'}
       </button>
 
       <button
         onClick={() => {
-          // fixme: error on click when result already there
+          // FIXME: error on click when result already there
           if (input.includes('-')) setInput(input.slice(1, input.length))
           else setInput('-' + input)
         }}
