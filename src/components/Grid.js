@@ -14,10 +14,24 @@ const Grid = ({
     setInput(input + n)
   }
 
+  const clickPlusMinus = () => {
+    if (input.includes('-')) setInput(input.slice(1, input.length))
+    else setInput('-' + input)
+  }
+
   const selectOperator = (o) => {
+    if (input === '' && prev === '') return clickPlusMinus()
     let thisInput = ''
     if (prev === '' && input !== '') thisInput = input
     else if (prev !== '' && input !== '') thisInput = equal()
+    else if (prev !== '' && input === '') {
+      console.log('ran')
+      setOperator(o)
+      if (o === '*') o = '×'
+      if (o === '/') o = '÷'
+      if (o === '-') o = '−'
+      return setPrev(prev.slice(0, prev.length - 1) + o)
+    }
 
     setOperator(o)
     if (o === '*') o = '×'
@@ -57,14 +71,7 @@ const Grid = ({
         {'DEL'}
       </button>
 
-      <button
-        onClick={() => {
-          // FIXME: error on click when result already there
-          if (input.includes('-')) setInput(input.slice(1, input.length))
-          else setInput('-' + input)
-        }}
-        className="btn"
-      >
+      <button onClick={clickPlusMinus} className="btn">
         +/-
       </button>
       <button className="btn operator-btn" onClick={() => selectOperator('/')}>
