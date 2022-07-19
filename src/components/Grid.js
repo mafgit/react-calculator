@@ -15,18 +15,17 @@ const Grid = ({
   }
 
   const selectOperator = (o) => {
-    if (prev === '' && input !== '') {
-      setOperator(o)
-      if (o === '*') o = '×'
-      if (o === '/') o = '÷'
-      if (o === '-') o = '−'
+    let thisInput = ''
+    if (prev === '' && input !== '') thisInput = input
+    else if (prev !== '' && input !== '') thisInput = equal()
 
-      setPrev(input + ' ' + o)
-      setInput('')
-    } else if (prev !== '' && input !== '') {
-      equal()
-      // TODO: get equal's value and show it in prev with an operator sign
-    }
+    setOperator(o)
+    if (o === '*') o = '×'
+    if (o === '/') o = '÷'
+    if (o === '-') o = '−'
+
+    setPrev(thisInput + ' ' + o)
+    setInput('')
   }
 
   const del = () => {

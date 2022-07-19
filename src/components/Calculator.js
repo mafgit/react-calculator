@@ -31,6 +31,7 @@ const Calculator = () => {
 
     setInput(res.toString())
     setPrev('')
+    return res.toString()
   }
 
   const clear = () => {
