@@ -1,6 +1,18 @@
 import React, { useEffect } from 'react'
 import '../styles/grid.css'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faC,
+  faCaretLeft,
+  faDivide,
+  faEquals,
+  faMinus,
+  faMultiply,
+  faPlus,
+  faPlusMinus,
+} from '@fortawesome/free-solid-svg-icons'
+
 const Grid = ({
   input,
   setInput,
@@ -25,7 +37,6 @@ const Grid = ({
     if (prev === '' && input !== '') thisInput = input
     else if (prev !== '' && input !== '') thisInput = equal()
     else if (prev !== '' && input === '') {
-      console.log('ran')
       setOperator(o)
       if (o === '*') o = '×'
       if (o === '/') o = '÷'
@@ -64,18 +75,21 @@ const Grid = ({
 
   return (
     <div className="grid">
-      <button className="btn" onClick={clear}>
-        C
+      <button className="btn fa-icon-btn" onClick={clear}>
+        <FontAwesomeIcon icon={faC} />
       </button>
-      <button className="btn back-btn" onClick={del}>
-        {'DEL'}
+      <button className="btn fa-icon-btn" onClick={del}>
+        <FontAwesomeIcon icon={faCaretLeft} />
       </button>
 
-      <button onClick={clickPlusMinus} className="btn">
-        +/-
+      <button onClick={clickPlusMinus} className="btn fa-icon-btn">
+        <FontAwesomeIcon icon={faPlusMinus} />
       </button>
-      <button className="btn operator-btn" onClick={() => selectOperator('/')}>
-        ÷
+      <button
+        className="btn operator-btn fa-icon-btn"
+        onClick={() => selectOperator('/')}
+      >
+        <FontAwesomeIcon icon={faDivide} />
       </button>
       <button onClick={() => addToScreen(7)} className="btn">
         7
@@ -86,8 +100,11 @@ const Grid = ({
       <button onClick={() => addToScreen(9)} className="btn">
         9
       </button>
-      <button className="btn operator-btn" onClick={() => selectOperator('*')}>
-        ×
+      <button
+        className="btn operator-btn fa-icon-btn"
+        onClick={() => selectOperator('*')}
+      >
+        <FontAwesomeIcon icon={faMultiply} />
       </button>
       <button onClick={() => addToScreen(4)} className="btn">
         4
@@ -99,8 +116,11 @@ const Grid = ({
         6
       </button>
 
-      <button className="btn operator-btn" onClick={() => selectOperator('+')}>
-        +
+      <button
+        className="btn operator-btn fa-icon-btn"
+        onClick={() => selectOperator('+')}
+      >
+        <FontAwesomeIcon icon={faPlus} />
       </button>
       <button onClick={() => addToScreen(1)} className="btn">
         1
@@ -112,8 +132,11 @@ const Grid = ({
         3
       </button>
 
-      <button className="btn operator-btn" onClick={() => selectOperator('-')}>
-        −
+      <button
+        className="btn operator-btn fa-icon-btn"
+        onClick={() => selectOperator('-')}
+      >
+        <FontAwesomeIcon icon={faMinus} />
       </button>
       <button
         className="btn"
@@ -128,8 +151,8 @@ const Grid = ({
       <button onClick={() => addToScreen(0)} className="btn">
         0
       </button>
-      <button className="btn equal-btn" onClick={equal}>
-        =
+      <button className="btn equal-btn fa-icon-btn" onClick={equal}>
+        <FontAwesomeIcon icon={faEquals} />
       </button>
     </div>
   )
