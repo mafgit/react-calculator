@@ -7,3 +7,17 @@
   gap: 20px;
   padding: 20px;
 }
+
+@media (max-width: 380px) {
+  .calculator {
+    width: 100%;
+  }
+  .calculator .btn {
+    font-size: 25px;
+  }
+
+  .calculator .btn:not(.equal-btn) {
+    width: 55px;
+    height: 55px;
+  }
+}
