@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Grid from './Grid'
 import Screen from './Screen'
 import '../styles/calculator.css'
