@@ -32,22 +32,19 @@ const Grid = ({
   }
 
   const selectOperator = (o) => {
-    if (input === '' && prev === '') return clickPlusMinus()
+    if ((input === '' || input === '-') && prev === '') {
+      if (o === '-') return clickPlusMinus()
+      else return
+    }
     let thisInput = ''
     if (prev === '' && input !== '') thisInput = input
     else if (prev !== '' && input !== '') thisInput = equal()
     else if (prev !== '' && input === '') {
       setOperator(o)
-      if (o === '*') o = '×'
-      if (o === '/') o = '÷'
-      if (o === '-') o = '−'
       return setPrev(prev.slice(0, prev.length - 1) + o)
     }
 
     setOperator(o)
-    if (o === '*') o = '×'
-    if (o === '/') o = '÷'
-    if (o === '-') o = '−'
 
     setPrev(thisInput + ' ' + o)
     setInput('')
